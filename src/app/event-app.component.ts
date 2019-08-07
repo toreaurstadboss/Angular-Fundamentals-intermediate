@@ -4,7 +4,9 @@ import { SWITCH_COMPILE_DIRECTIVE__POST_R3__ } from '@angular/core/src/metadata/
 
 @Component({
   selector: 'app-event-root',
-  template: '<events-list></events-list><img src=\'assets/images/basic-shield.png\' />',
+  template: `
+  <nav-bar></nav-bar>
+  <events-list></events-list><img src=\'assets/images/basic-shield.png\' />`,
   styleUrls: ['./event-app.component.css']
 })
 export class EventAppComponent {

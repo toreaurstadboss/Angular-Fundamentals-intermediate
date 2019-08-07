@@ -3,6 +3,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'event-thumbnail',
   styles:[`
+  .thumbnail { min-height: 210px; }
   .pad-left { margin-left: 10px; }
   .well div { color: #bbb; }
   `],
@@ -18,7 +19,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
    <span>Country: {{event.location.country}}</span>
    </div>
   </div>
-  <button class="btn btn-primary" (click)="handleClick($event)">Click me</button>`
+  <!-- <button class="btn btn-primary" (click)="handleClick($event)">Click me</button> -->`
 })
 export class EventThumbnailComponent {
   @Input() event: any;
