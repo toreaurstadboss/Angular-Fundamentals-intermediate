@@ -6,6 +6,11 @@ import { Component } from '@angular/core';
 })
 export class EventsListComponent {
 
+
+  handleEventClicked(data) {
+    console.log('received: ' + data);
+  }
+
   event1 = {
     id: 1,
     name: 'Angular Connect',
