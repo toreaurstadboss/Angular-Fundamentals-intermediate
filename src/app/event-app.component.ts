@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import { SWITCH_IVY_ENABLED__POST_R3__ } from '@angular/core/src/ivy_switch';
+import { SWITCH_COMPILE_DIRECTIVE__POST_R3__ } from '@angular/core/src/metadata/directives';
 
 @Component({
   selector: 'app-event-root',
-  template: '<p>Hello World</p>',
+  template: '<events-list></events-list><img src=\'assets/images/basic-shield.png\' />',
   styleUrls: ['./event-app.component.css']
 })
 export class EventAppComponent {
