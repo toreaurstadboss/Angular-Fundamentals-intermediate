@@ -1,3 +1,7 @@
+#Repo for following along the course Angular intermediate level from Pluralsight
+Adjustments for Tore Aurstad boss
+
+
 # AngularFundamentals
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.1.0.
