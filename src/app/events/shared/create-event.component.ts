@@ -17,6 +17,7 @@ import { Inject } from "@angular/core";
   `
 })
 export class CreateEventComponent {
+  isDirty: boolean = false;
 
   constructor (@Inject(Router) private router: Router){
 
