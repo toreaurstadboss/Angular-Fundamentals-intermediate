@@ -11,7 +11,7 @@ declare let toastr
   .bold { font-weight: bold; }
   `],
   template: `
-  <div class="well hoverwell thumbnail">
+  <div class="well hoverwell thumbnail" [routerLink]="['/events', event.id ]">
   <h2>{{event.name}}</h2>
   <div>Date: {{event.date}}</div>
   <div [ngClass]="getStartTimeClass()" [ngSwitch]="event?.time">
