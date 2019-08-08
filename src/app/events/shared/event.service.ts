@@ -5,11 +5,21 @@ import { Injectable } from "@angular/core";
 })
 export class EventService {
 
+getEvents() {
+  return EVENTS;
+}
 
+getEvent(id: number) {
+  // debugger
+  let event = EVENTS.find(event => event.id === id);
+  return event;
+}
 
-  getEvents() : any[]{
-    return [
-    {
+}
+
+const EVENTS: any[] =
+[
+  {
       id: 1,
       name: 'Angular Connect',
       date: '9/26/2036',
@@ -318,7 +328,3 @@ export class EventService {
       ]
     }
   ];
-
-}
-
-}

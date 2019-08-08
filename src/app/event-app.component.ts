@@ -7,7 +7,8 @@ import { SWITCH_COMPILE_DIRECTIVE__POST_R3__ } from '@angular/core/src/metadata/
   template: `
   <nav-bar></nav-bar>
   <div id='toast'></div>
-  <events-list></events-list><img src=\'assets/images/basic-shield.png\' />`,
+ <router-outlet></router-outlet>
+ <img src=\'assets/images/basic-shield.png\' />`,
   styleUrls: ['./event-app.component.css']
 })
 export class EventAppComponent {
