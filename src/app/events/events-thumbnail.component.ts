@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+declare let toastr
 
 @Component({
   selector: 'event-thumbnail',

@@ -28,7 +28,9 @@ button {
 }
 
 .toast-success {
-  background-color: #51a351;
+  background-color: #51a351 !important;
+  z-index: 2000 !important;
+  top: 100px;
 }
 .toast-error {
   background-color: #bd362f;
@@ -39,7 +41,12 @@ button {
 .toast-warning {
   background-color: #f89406;
 }
-/* 
+
+#toast-container > div {
+  opacity:1;
+}
+
+/*
 h2 {
   color: green;
   font-family: 'Comic Sans MS'

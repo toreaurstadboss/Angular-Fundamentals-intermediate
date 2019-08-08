@@ -4,8 +4,13 @@ import { EventsListComponent } from './events/events-list.component';
 import { EventThumbnailComponent } from './events/events-thumbnail.component';
 import { EventAppComponent } from './event-app.component';
 import { NavBarComponent } from './nav/navbar.component';
+import { EventService } from "./events/shared/event.service";
+import { ToastrService } from "src/app/common/toastr.service";
 
 @NgModule({
+  imports: [
+    BrowserModule
+  ],
   declarations: [
     EventAppComponent,
     EventsListComponent,
@@ -15,10 +20,10 @@ import { NavBarComponent } from './nav/navbar.component';
   schemas: [
     NO_ERRORS_SCHEMA
   ],
-  imports: [
-    BrowserModule
+  providers: [
+    EventService,
+    ToastrService
   ],
-  providers: [],
   bootstrap: [EventAppComponent]
 })
 export class EventAppModule { }
