@@ -4,12 +4,13 @@ import { OnInit } from "@angular/core";
 import { Inject } from "@angular/core";
 import { ToastrService } from "src/app/common/toastr.service";
 import { Router, ActivatedRoute } from "@angular/router";
+import { IEvent } from './shared';
 
 @Component({
   templateUrl: './events-list.component.html'
 })
 export class EventsListComponent implements OnInit {
-  events: any[];
+  events: IEvent[];
 
 
 ngOnInit(): void {

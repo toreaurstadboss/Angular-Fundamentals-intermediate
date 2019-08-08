@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { IEvent } from './shared';
 declare let toastr
 
 @Component({
@@ -33,9 +34,9 @@ declare let toastr
   <!-- <button class="btn btn-primary" (click)="handleClick($event)">Click me</button> -->`
 })
 export class EventThumbnailComponent {
-  @Input() event: any;
+  @Input() event: IEvent;
   @Output() eventClick = new EventEmitter();
-  someProperty:any = "some value";
+  someProperty: any = "some value";
 
   handleClick($event): void {
     this.eventClick.emit(JSON.stringify(this.event));
