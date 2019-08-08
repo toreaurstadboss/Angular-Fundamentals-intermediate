@@ -10,7 +10,7 @@ getEvents() {
   let subject = new Subject();
   setTimeout(() => {
     subject.next(EVENTS); subject.complete();
-  }, 2000);
+  }, 20);
   return subject;
 }
 
