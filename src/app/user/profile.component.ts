@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core'
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
@@ -17,9 +17,15 @@ export class ProfileComponent implements OnInit {
   private lastName: FormControl;
   profileForm: FormGroup;
   ngOnInit(): void {
-    this.firstName = new FormControl(this.authService.currentUser.firstName, Validators.required);
-    this.lastName = new FormControl(this.authService.currentUser.lastName, Validators.required);
-    this.profileForm = new FormGroup({
+ // debugger
+  if (!this.authService.currentUser) {
+    this.router.navigate(['/user/login']);
+
+  }
+  this.firstName = new FormControl(this.authService.currentUser.firstName,
+      [Validators.required, Validators.pattern('[a-zA-Z]*') ]);
+  this.lastName = new FormControl(this.authService.currentUser.lastName, Validators.required);
+  this.profileForm = new FormGroup({
       firstName: this.firstName,
       lastName: this.lastName
     });
@@ -41,11 +47,17 @@ export class ProfileComponent implements OnInit {
   }
 
   validateLastName(): boolean {
+   if (this.profileForm) {
    return this.lastName.valid || this.lastName.untouched;
+   }
+   return true;
   }
 
   validateFirstName(): boolean {
+    if (this.profileForm) {
     return this.firstName.valid || this.firstName.untouched;
+    }
+    return true;
    }
 
 
