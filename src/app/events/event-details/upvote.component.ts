@@ -10,8 +10,7 @@ import { VoterService } from './voter.service';
   <div class="votingWidgetContainer pointable" (click)="onClick()">
    <div class="well votingWidget">
     <div class="votingButton">
-     <i *ngIf="voted" class="glyphicon glyphicon-heart"></i>
-     <i *ngIf="!voted" class="glyphicon glyphicon-heart-empty"></i>
+     <i [style.color]="iconColor" class="glyphicon glyphicon-heart"></i>
      <div class="badge badge-inverse votingCount">
       <div>{{count}}</div>
      </div>
@@ -21,15 +20,27 @@ import { VoterService } from './voter.service';
 })
 export class UpvoteComponent {
   @Input() count: number;
-  @Input() voted: boolean;
+  @Input() set voted(val) {
+    if (this.iconColor === 'red') {
+      this.iconColor = 'white';
+    }
+    else {
+      this.iconColor = 'red';
+    }
+  }
   @Output() vote = new EventEmitter();
   @Input() sortBy: string;
   @Input() visibleSessions: boolean;
+  iconColor: string;
 
   constructor(@Inject(AuthService) private auth: AuthService, @Inject(VoterService) private voterService: VoterService) {
   }
 
   onClick() {
+    if (this.voted)
+     this.voted = undefined;
+    else
+     this.voted = true;
     this.vote.emit('');
   }
 
