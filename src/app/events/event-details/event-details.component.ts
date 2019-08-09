@@ -3,7 +3,7 @@ import { Component } from "@angular/core";
 import { OnInit } from "@angular/core";
 import { EventService } from "src/app/events/shared/event.service";
 import { Inject } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Params } from "@angular/router";
 import { IEvent, ISession } from '../shared';
 
 @Component({
@@ -24,8 +24,14 @@ export class EventDetailsComponent implements OnInit {
 
  ngOnInit(): void {
   //  debugger
- let id = +this.route.snapshot.params['id'];
- this.event = this.eventService.getEvent(id);
+//  let id = +this.route.snapshot.params['id'];
+//  this.event = this.eventService.getEvent(id);
+
+
+ this.route.params.forEach((params: Params) => {
+   this.event = this.eventService.getEvent(+params['id']);
+ });
+
 }
 
   constructor(@Inject(EventService)private eventService: EventService, @Inject(ActivatedRoute) private route: ActivatedRoute) {

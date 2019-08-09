@@ -5,6 +5,7 @@
           <i *ngIf="session.voters.length > 3" class="glyphicon glyphicon-fire" style="color:red"></i>
         </div>
         <div well-body>
+          <h3>{{session.name | uppercase}}</h3>
           <h6>{{session.presenter}}</h6>
           <span>Duration: {{session.duration | duration}}</span><br />
           <span>Level: {{session.level}}</span>

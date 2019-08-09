@@ -8,6 +8,8 @@ p {
   font-size: '32pt';
 }
 
+.modal-backdrop { position: relative }
+
 .hoverwell:hover {
   background-color: #485563;
   cursor: pointer;

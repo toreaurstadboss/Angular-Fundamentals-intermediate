@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Subject, Observable, of } from 'rxjs';
 import { IEvent } from './event.model';
+import { ISession } from '.';
+import { EventEmitter } from 'events';
 
 
 const EVENTS: IEvent[] = [
@@ -319,6 +321,21 @@ const EVENTS: IEvent[] = [
   providedIn: 'root'
 })
 export class EventService {
+
+  searchSessions(searchTerm: string): Observable<ISession[]> {
+    const term = searchTerm.toLocaleLowerCase();
+    // tslint:disable-next-line: prefer-const
+    let results: ISession[] = [];
+    EVENTS.forEach(event => {
+      const matchingSessions = event.sessions.filter(session => session.name.toLocaleLowerCase().indexOf(term) > -1);
+      matchingSessions.map((session: any) => {
+        session.eventid = event.id;
+        return session;
+      });
+      results = results.concat(matchingSessions);
+    });
+    return of(results);
+  }
   getEvents(): Observable<IEvent[]> {
     const subject = new Subject<IEvent[]>();
     setTimeout(() => {
@@ -327,6 +344,7 @@ export class EventService {
     }, 20);
     return subject;
   }
+
 
   saveEvent(event) {
     event.id = 999;
