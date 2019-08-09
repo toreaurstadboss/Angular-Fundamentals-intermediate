@@ -1,45 +1,11 @@
-import { Injectable } from '@angular/core';
-declare let toastr:any
-
-@Injectable()
-export class ToastrService {
-
-  constructor () {
-    toastr.options = {
-      "positionClass": "toast top",
-      "onclick": null,
-      "fadeIn": 300,
-      "fadeOut": 1000,
-      "timeOut": 5000,
-      "extendedTimeOut": 1000
-    };
-  }
-
-  success(message: string, title?: string) {
-    toastr.options = {
-      "position-class": "top",
-      "onclick": null,
-      "fadeIn": 300,
-      "fadeOut": 1000,
-      "timeOut": 5000,
-    };
-    console.log('inside ToastrService.success');
-   toastr.success(message,title);
-  }
-
-  info(message: string, title?: string) {
-    toastr.message(message,title);
-   }
+import { InjectionToken } from '@angular/core';
 
 
-   warning(message: string, title?: string) {
-    toastr.warning(message,title);
-   }
+export let TOASTR_TOKEN = new InjectionToken<Toastr>('toastr');
 
-
-   error(message: string, title?: string) {
-    toastr.error(message,title);
-   }
-
-
+export interface Toastr {
+  success (message: string, title?: string) : void;
+  warn (message: string, title?: string) : void;
+  info (message: string, title?: string) : void;
+  error (message: string, title?: string) : void;
 }

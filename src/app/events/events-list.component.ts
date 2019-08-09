@@ -17,15 +17,8 @@ ngOnInit(): void {
   this.events = this.route.snapshot.data['events'];
 }
 
-constructor (@Inject(EventService)private eventService: EventService, @Inject(ActivatedRoute) private route: ActivatedRoute,
- @Inject(ToastrService)private toastrService: ToastrService, @Inject(Router) private router: Router) {
+constructor (@Inject(EventService)private eventService: EventService, @Inject(ActivatedRoute) private route: ActivatedRoute, @Inject(Router) private router: Router) {
 
-  }
-
-  handleThumbnailClick(event): void {
-    this.toastrService.success(event.name);
-    //debugger
-    this.router.navigate(['events', event.id]);
   }
 
   handleEventClicked(data) {

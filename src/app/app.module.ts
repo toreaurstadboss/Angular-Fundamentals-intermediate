@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { EventAppComponent } from './event-app.component';
 import { NavBarComponent } from './nav/navbar.component';
-import { ToastrService } from "src/app/common/toastr.service";
+import { ToastrService, TOASTR_TOKEN, Toastr } from "src/app/common/toastr.service";
 import { RouterModule } from "@angular/router";
 import { appRoutes } from './routes';
 import { Error404Component } from "src/app/errors/404.component";
@@ -22,6 +22,8 @@ import { AuthService } from './user/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CollapsibleWellComponent } from "src/app/common/collapsible-well.component";
 import { DurationPipe } from "src/app/events/shared";
+
+declare let toastr: Toastr
 
 @NgModule({
   imports: [
@@ -49,7 +51,7 @@ import { DurationPipe } from "src/app/events/shared";
   providers: [
     EventService,
     AuthService,
-    ToastrService,
+    { provide: TOASTR_TOKEN, useValue: toastr },
     EventRouteActivator,
     EventListResolver,
     { provide: 'canDeactivateCreateEvent', useValue: checkDirtyState }
@@ -59,8 +61,8 @@ import { DurationPipe } from "src/app/events/shared";
 export class EventAppModule { }
 
 export function checkDirtyState(component: CreateEventComponent) {
-   if (component.isDirty) {
-     return window.confirm('You have not saved this event, do you really want to cancel?');
-   }
-   return true;
+  if (component.isDirty) {
+    return window.confirm('You have not saved this event, do you really want to cancel?');
+  }
+  return true;
 }
