@@ -39,6 +39,10 @@ export class EventDetailsComponent implements OnInit {
 
   }
 
+  cancelAddSession(): void {
+    this.addMode = false;
+  }
+
   addSession(): void {
     this.addMode = true;
     if (this.event) {

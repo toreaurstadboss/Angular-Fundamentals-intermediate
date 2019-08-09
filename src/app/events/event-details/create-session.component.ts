@@ -48,6 +48,11 @@ export class CreateSesionComponent implements OnInit {
     this.saveNewSession.emit(session);
   }
 
+  cancel() {
+    this.cancelAddSession.emit();
+
+  }
+
   ngOnInit(): void {
     this.name = new FormControl('', Validators.required);
     this.presenter = new FormControl('', Validators.required);
