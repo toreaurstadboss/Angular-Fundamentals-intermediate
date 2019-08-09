@@ -23,11 +23,13 @@ import {
   EventRouteActivator,
   EventListResolver,
   CreateSesionComponent,
-  SessionListComponent
+  SessionListComponent,
+  VoterService
 } from './events/index';
 import { AuthService } from './user/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DurationPipe } from "src/app/events/shared";
+import { UpvoteComponent } from './events/event-details/upvote.component';
 
 let toastr:Toastr = window['toastr'];
 let jQuery = window['$'];
@@ -52,7 +54,8 @@ let jQuery = window['$'];
     ModalTriggerDirective,
     EventThumbnailComponent,
     CreateEventComponent,
-    Error404Component
+    Error404Component,
+    UpvoteComponent
   ],
   schemas: [
     NO_ERRORS_SCHEMA
@@ -60,6 +63,7 @@ let jQuery = window['$'];
   providers: [
     EventService,
     AuthService,
+    VoterService,
     { provide: TOASTR_TOKEN, useValue: toastr },
     { provide: JQ_TOKEN, useValue: jQuery },
     EventRouteActivator,

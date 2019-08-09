@@ -1,15 +1,24 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ISession } from "src/app/events";
 import { OnChanges } from "@angular/core";
 import { SimpleChanges } from "@angular/core";
 import { ChangeDetectorRef } from "@angular/core";
 import { Inject } from "@angular/core";
+import { AuthService } from 'src/app/user/auth.service';
+import { VoterService } from './voter.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'session-list',
   templateUrl: './session-list.component.html'
 })
-export class SessionListComponent implements OnChanges {
+export class SessionListComponent implements OnChanges, OnInit {
+  ngOnInit(): void {
+    if (!this.auth.currentUser){
+      this.router.navigate(['/user/login']);
+
+    }
+  }
 
   @Input() sessions: ISession[]; //importing ISession here
 
@@ -17,7 +26,9 @@ export class SessionListComponent implements OnChanges {
 
   @Input() filterBy: string;
 
-  construct() {
+  constructor(@Inject(AuthService) private auth: AuthService,
+  @Inject(Router) private router: Router,
+   @Inject(VoterService) private voterService: VoterService) {
 
   }
 
@@ -41,6 +52,22 @@ export class SessionListComponent implements OnChanges {
       });
     }
 
+  }
+
+
+  userHasVoted(session: ISession) {
+    return this.voterService.userHasVoted(session, this.auth.currentUser.userName);
+  }
+
+
+  toggleVote(session: ISession) {
+    if (this.userHasVoted(session)) {
+      this.voterService.deleteVoter(session,this.auth.currentUser.userName);
+    } else {
+      this.voterService.addVoter(session, this.auth.currentUser.userName);
+    }
+    // if (this.sortBy === 'votes')
+    //  this.visibleSessions.sort(thi.sortByVotesDesc);
   }
 
 }
