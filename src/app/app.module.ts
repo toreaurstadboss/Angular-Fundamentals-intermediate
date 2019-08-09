@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { EventAppComponent } from './event-app.component';
 import { NavBarComponent } from './nav/navbar.component';
-import { ToastrService, TOASTR_TOKEN, Toastr } from "src/app/common/toastr.service";
+import { TOASTR_TOKEN, Toastr } from "src/app/common/toastr.service";
 import { RouterModule } from "@angular/router";
 import { appRoutes } from './routes';
 import { Error404Component } from "src/app/errors/404.component";

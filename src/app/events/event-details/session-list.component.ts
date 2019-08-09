@@ -17,16 +17,12 @@ export class SessionListComponent implements OnChanges {
 
   @Input() filterBy: string;
 
-  construct(@Inject(ChangeDetectorRef) private cd  : ChangeDetectorRef ) {
+  construct() {
 
   }
 
   visibleSessions: ISession[] = [];
 
-  sortInvoke() {
-    this.cd.detecChanges();
-
-  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.sessions) {
