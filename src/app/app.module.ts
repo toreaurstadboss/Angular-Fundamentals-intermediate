@@ -21,6 +21,7 @@ import {
 import { AuthService } from './user/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CollapsibleWellComponent } from "src/app/common/collapsible-well.component";
+import { DurationPipe } from "src/app/events/shared";
 
 @NgModule({
   imports: [
@@ -34,6 +35,7 @@ import { CollapsibleWellComponent } from "src/app/common/collapsible-well.compon
     CreateSesionComponent,
     SessionListComponent,
     CollapsibleWellComponent,
+    DurationPipe,
     EventsListComponent,
     NavBarComponent,
     EventDetailsComponent,

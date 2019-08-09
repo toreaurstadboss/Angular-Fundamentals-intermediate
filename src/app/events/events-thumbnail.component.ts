@@ -13,15 +13,15 @@ declare let toastr
   `],
   template: `
   <div class="well hoverwell thumbnail" [routerLink]="['/events', event.id ]">
-  <h2>{{event.name}}</h2>
-  <div>Date: {{event.date}}</div>
+  <h2>{{event.name | uppercase}}</h2>
+  <div>Date: {{event.date | date:'d.M.y'}}</div>
   <div [ngClass]="getStartTimeClass()" [ngSwitch]="event?.time">
    Time: {{event.time}}
    <span *ngSwitchCase="'8:00 am'">(Early Start)</span>
    <span *ngSwitchCase="'10:00 am'">(Late Start)</span>
    <span *ngSwitchDefault>(Normal Start)</span>
   </div>
-  <div>Price: \${{event.price}}</div>
+  <div>Price: {{event.price | currency:'USD'}}</div>
    <div [hidden]="!event?.location">
    <span>Address: {{event.location.address}}</span>&nbsp;
    <span class="pad-left">City: {{event.location.city}}</span>&nbsp;
