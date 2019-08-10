@@ -14,7 +14,7 @@ export class VoterService {
     session.voters = session.voters.filter(voter => voter !== voterName);
     const options = { headers: new HttpHeaders({ 'Content-type': '/application/json'})};
     const url = `/api/events/${eventId}/sessions/${session.id}/voters/${voterName}`;
-    this.http.delete(url, {}, options).pipe(catchError(this.handleError('addVoter')))
+    this.http.delete(url, options).pipe(catchError(this.handleError('addVoter')))
     .subscribe();
   }
 
