@@ -16,7 +16,7 @@ import { AuthService } from './user/auth.service';
 export class EventAppComponent implements OnInit {
 
   ngOnInit(): void {
-    this.auth.checkAuthenticationSatus();
+    this.auth.checkAuthenticationStatus();
 
   }
   constructor(@Inject(AuthService) private auth: AuthService) {

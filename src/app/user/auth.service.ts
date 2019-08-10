@@ -7,8 +7,13 @@ import { of, Observable } from 'rxjs';
 @Injectable()
 export class AuthService {
 
-  checkAuthenticationSatus() {
-    this.http.get('/api/currentIdentity').subscribe
+  checkAuthenticationStatus() {
+    this.http.get('/api/currentIdentity')
+    .pipe(tap(data => {
+      if (data instanceof Object) {
+        this.currentUser = <IUser>data;
+      }
+    })).subscribe();
   }
   currentUser: IUser;
 
@@ -37,9 +42,18 @@ export class AuthService {
     // };
   }
 
-  updateCurrentUser(firstName: string, lastName: string): void {
+  logout() {
+    this.currentUser = undefined;
+    let options = { headers: new HttpHeaders({ 'Content-type': 'application/json'  }) };
+    return this.http.post('/api/logout', {}, options);
+  }
+
+  updateCurrentUser(firstName: string, lastName: string): Observable<any> {
+    debugger
     this.currentUser.firstName = firstName;
     this.currentUser.lastName = lastName;
+    const options = { headers: new HttpHeaders({'Content-Type': 'application/json' }) };
+    return this.http.put(`/api/users/${this.currentUser}`, this.currentUser, options);
   }
 
   isAuthenticated() {
