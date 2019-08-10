@@ -23,8 +23,7 @@ export class UpvoteComponent {
   @Input() set voted(val) {
     if (this.iconColor === 'red') {
       this.iconColor = 'white';
-    }
-    else {
+    } else {
       this.iconColor = 'red';
     }
   }
@@ -37,16 +36,18 @@ export class UpvoteComponent {
   }
 
   onClick() {
-    if (this.voted)
+    if (this.voted) {
      this.voted = undefined;
-    else
+    }
+    else {
      this.voted = true;
+    }
     this.vote.emit('');
   }
 
 
   sortByVotesDesc() {
     return 0;
-  };
+  }
 
 }

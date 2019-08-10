@@ -22,6 +22,7 @@ import {
   CreateEventComponent,
   EventRouteActivator,
   EventListResolver,
+  LocationValidator,
   CreateSesionComponent,
   SessionListComponent,
   VoterService
@@ -52,6 +53,7 @@ let jQuery = window['$'];
     EventDetailsComponent,
     SimpleModalComponent,
     ModalTriggerDirective,
+    LocationValidator,
     EventThumbnailComponent,
     CreateEventComponent,
     Error404Component,

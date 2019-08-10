@@ -6,5 +6,5 @@ export interface ISession {
   level: string;
   abstract: string;
   voters: string[];
-  userHasVoted();
+  // userHasVoted();
 }
