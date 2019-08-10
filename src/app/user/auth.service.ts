@@ -6,6 +6,10 @@ import { of, Observable } from 'rxjs';
 
 @Injectable()
 export class AuthService {
+
+  checkAuthenticationSatus() {
+    this.http.get('/api/currentIdentity').subscribe
+  }
   currentUser: IUser;
 
   constructor(@Inject(HttpClient) private http: HttpClient) {
