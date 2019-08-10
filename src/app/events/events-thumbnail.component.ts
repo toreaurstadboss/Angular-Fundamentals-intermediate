@@ -22,7 +22,7 @@ declare let toastr
    <span *ngSwitchDefault>(Normal Start)</span>
   </div>
   <div>Price: {{event.price | currency:'USD'}}</div>
-   <div [hidden]="!event?.location">
+   <div *ngIf="event.location">
    <span>Address: {{event.location.address}}</span>&nbsp;
    <span class="pad-left">City: {{event.location.city}}</span>&nbsp;
    <span>Country: {{event.location.country}}</span>

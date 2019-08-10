@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Subject, Observable, of } from 'rxjs';
+import { Injectable, Inject } from '@angular/core';
+import { Subject, Observable, of, pipe } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { IEvent } from './event.model';
 import { ISession } from '.';
 import { EventEmitter } from 'events';
-
+import { HttpClient } from '@angular/common/http';
 
 const EVENTS: IEvent[] = [
   {
@@ -316,18 +317,20 @@ const EVENTS: IEvent[] = [
   }
 ];
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
+  constructor(@Inject(HttpClient) private http: HttpClient) {}
 
   searchSessions(searchTerm: string): Observable<ISession[]> {
     const term = searchTerm.toLocaleLowerCase();
     // tslint:disable-next-line: prefer-const
     let results: ISession[] = [];
     EVENTS.forEach(event => {
-      const matchingSessions = event.sessions.filter(session => session.name.toLocaleLowerCase().indexOf(term) > -1);
+      const matchingSessions = event.sessions.filter(
+        session => session.name.toLocaleLowerCase().indexOf(term) > -1
+      );
       matchingSessions.map((session: any) => {
         session.eventid = event.id;
         return session;
@@ -337,14 +340,17 @@ export class EventService {
     return of(results);
   }
   getEvents(): Observable<IEvent[]> {
-    const subject = new Subject<IEvent[]>();
-    setTimeout(() => {
-      subject.next(EVENTS);
-      subject.complete();
-    }, 20);
-    return subject;
+    return this.http.get<IEvent[]>('/api/events').pipe(
+      catchError(this.handleError<IEvent[]>('getEvents', []))
+    );
   }
 
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error);
+      return of(result as T);
+    };
+  }
 
   saveEvent(event) {
     event.id = 999;
@@ -353,14 +359,13 @@ export class EventService {
   }
 
   updateEvent(event) {
-    const index = EVENTS.findIndex(x => x.id = event.id);
+    const index = EVENTS.findIndex(x => (x.id = event.id));
     EVENTS[index] = event;
-
   }
 
-  getEvent(id: number): IEvent {
-    // debugger
-    const event = EVENTS.find(event => event.id === id);
-    return event;
+  getEvent(id: number): Observable<IEvent> {
+    return this.http.get<IEvent>('/api/events/' + id).pipe(
+      catchError(this.handleError<IEvent>('getEvents'))
+    );
   }
 }

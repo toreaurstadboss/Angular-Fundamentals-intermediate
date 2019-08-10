@@ -28,10 +28,11 @@ export class EventDetailsComponent implements OnInit {
 //  this.event = this.eventService.getEvent(id);
 
 
- this.route.params.forEach((params: Params) => {
-   this.event = this.eventService.getEvent(+params['id']);
+ this.route.data.forEach((data) => {
+   // tslint:disable-next-line: no-string-literal
+   this.event = data['event'];
+   this.addMode = false;
  });
-
 }
 
   constructor(@Inject(EventService)private eventService: EventService, @Inject(ActivatedRoute) private route: ActivatedRoute) {

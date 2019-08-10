@@ -4,6 +4,7 @@ import { EventAppComponent } from './event-app.component';
 import { NavBarComponent } from './nav/navbar.component';
 import { Toastr } from "src/app/common/toastr.service";
 import { RouterModule } from "@angular/router";
+import { HttpClientModule } from '@angular/common/http';
 import { appRoutes } from './routes';
 import { Error404Component } from "src/app/errors/404.component";
 import {
@@ -20,7 +21,6 @@ import {
   EventService,
   EventDetailsComponent,
   CreateEventComponent,
-  EventRouteActivator,
   EventListResolver,
   LocationValidator,
   CreateSesionComponent,
@@ -29,7 +29,7 @@ import {
 } from './events/index';
 import { AuthService } from './user/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DurationPipe } from "src/app/events/shared";
+import { DurationPipe, EventResolver } from "src/app/events/shared";
 import { UpvoteComponent } from './events/event-details/upvote.component';
 
 let toastr:Toastr = window['toastr'];
@@ -38,6 +38,7 @@ let jQuery = window['$'];
 @NgModule({
   imports: [
     BrowserModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes)
@@ -68,7 +69,7 @@ let jQuery = window['$'];
     VoterService,
     { provide: TOASTR_TOKEN, useValue: toastr },
     { provide: JQ_TOKEN, useValue: jQuery },
-    EventRouteActivator,
+    EventResolver,
     EventListResolver,
     { provide: 'canDeactivateCreateEvent', useValue: checkDirtyState }
   ],
