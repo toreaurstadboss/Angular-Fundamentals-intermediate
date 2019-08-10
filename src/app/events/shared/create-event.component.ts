@@ -3,6 +3,7 @@ import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { Inject } from "@angular/core";
 import { EventService } from './event.service';
+import { IEvent } from '.';
 
 @Component({
   styles: [ `
@@ -22,9 +23,11 @@ export class CreateEventComponent {
 
   saveEvent(formValues) {
     console.log(formValues);
-    this.eventService.saveEvent(formValues);
-    this.isDirty = false;
-    this.router.navigate(['/events']);
+    this.eventService.saveEvent(formValues).subscribe((savedEvent: IEvent) => {
+      console.log('Saved event: ' + JSON.stringify(savedEvent));
+      this.isDirty = false;
+      this.router.navigate(['/events']);
+    });
   }
 
   cancel() {

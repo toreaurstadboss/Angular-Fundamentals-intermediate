@@ -19,16 +19,18 @@ export class NavBarComponent {
 
 
   constructor(@Inject(AuthService) private auth: AuthService,
-   @Inject(EventService) private eventService: EventService) {
+              @Inject(EventService) private eventService: EventService) {
   }
 
   searchSessions(searchTerm) {
-    //debugger
-    this.eventService.searchSessions(searchTerm).subscribe(sessions => this.foundSessions = sessions);
+    // debugger
+    this.eventService.searchSessions(searchTerm).subscribe(sessions =>
+      this.foundSessions = sessions);
+      
     console.log(this.foundSessions);
   }
 
-  isLoggIn(){
+  isLoggIn() {
     return this.auth.isAuthenticated();
   }
 
