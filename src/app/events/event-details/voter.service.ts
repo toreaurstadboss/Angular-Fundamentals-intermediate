@@ -6,7 +6,7 @@ import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class VoterService {
-  constructor(@Inject(HttpClient) private http: HttpClient) {
+  constructor(@Inject(HttpClient) private http: HttpClient | any) {
 
 
   }
