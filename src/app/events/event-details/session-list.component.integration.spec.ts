@@ -70,11 +70,21 @@ describe("SessionListComponent", () => {
 
       component.ngOnChanges();
       fixture.detectChanges();
-      setTimeout(() => { console.log("Well element h3: " + element.querySelector("h3").textContent); }, 2000);
+      setTimeout(() => {
+        console.log(
+          "Well element h3: " + element.querySelector("h3").textContent
+        );
+      }, 2000);
 
-      expect(element.querySelector("h3").textContent.toLocaleLowerCase()).toContain(
-        "session 1"
-      );
+      expect(
+        element.querySelector("h3").textContent.toLocaleLowerCase()
+      ).toContain("session 1");
+
+      expect(
+        debugEl
+          .query(By.css("h3"))
+          .nativeElement.textContent.toLocaleLowerCase()
+      ).toContain("session 1");
     });
   });
 });

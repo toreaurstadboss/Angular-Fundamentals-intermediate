@@ -34,7 +34,7 @@ export class SessionListComponent implements OnChanges, OnInit {
       this.router.navigate(['/user/login']);
 
     }
-  } 
+  }
 
   ngOnChanges(): void {
     if (this.sessions) {
