@@ -18,7 +18,7 @@ export class NavBarComponent {
   foundSessions: ISession[];
 
 
-  constructor(@Inject(AuthService) private auth: AuthService,
+  constructor(@Inject(AuthService) public auth: AuthService,
               @Inject(EventService) private eventService: EventService) {
   }
 
@@ -26,7 +26,7 @@ export class NavBarComponent {
     // debugger
     this.eventService.searchSessions(searchTerm).subscribe(sessions =>
       this.foundSessions = sessions);
-      
+
     console.log(this.foundSessions);
   }
 

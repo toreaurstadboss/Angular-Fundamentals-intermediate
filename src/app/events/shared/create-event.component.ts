@@ -26,6 +26,7 @@ import { IEvent } from ".";
 })
 export class CreateEventComponent {
   isDirty: boolean = true;
+  newEvent: IEvent;
 
   constructor(
     @Inject(Router) private router: Router,

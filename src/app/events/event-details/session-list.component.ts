@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class SessionListComponent implements OnChanges, OnInit {
 
-  constructor(@Inject(AuthService) private auth: AuthService,
+  constructor(@Inject(AuthService) public auth: AuthService,
   @Inject(Router) private router: Router,
    @Inject(VoterService) private voterService: VoterService) {
 
