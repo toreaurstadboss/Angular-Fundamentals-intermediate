@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ISession } from "src/app/events";
-import { OnChanges } from "@angular/core";
-import { SimpleChanges } from "@angular/core";
-import { ChangeDetectorRef } from "@angular/core";
-import { Inject } from "@angular/core";
+import { ISession } from 'src/app/events';
+import { OnChanges } from '@angular/core';
+import { SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
+import { Inject } from '@angular/core';
 import { AuthService } from 'src/app/user/auth.service';
 import { VoterService } from './voter.service';
 import { Router } from '@angular/router';
@@ -13,11 +13,11 @@ import { Router } from '@angular/router';
   templateUrl: './session-list.component.html'
 })
 export class SessionListComponent implements OnChanges, OnInit {
-  ngOnInit(): void {
-    if (!this.auth.currentUser){
-      this.router.navigate(['/user/login']);
 
-    }
+  constructor(@Inject(AuthService) private auth: AuthService,
+  @Inject(Router) private router: Router,
+   @Inject(VoterService) private voterService: VoterService) {
+
   }
 
   @Input() sessions: ISession[]; //importing ISession here
@@ -28,19 +28,18 @@ export class SessionListComponent implements OnChanges, OnInit {
 
   @Input() filterBy: string;
 
-  constructor(@Inject(AuthService) private auth: AuthService,
-  @Inject(Router) private router: Router,
-   @Inject(VoterService) private voterService: VoterService) {
-
-  }
-
   visibleSessions: ISession[] = [];
+  ngOnInit(): void {
+    if (!this.auth.currentUser){
+      this.router.navigate(['/user/login']);
 
+    }
+  } 
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     if (this.sessions) {
       this.filterSessions(this.filterBy);
-      //debugger
+      // debugger
       this.sortBy === 'name' ? this.visibleSessions.sort(sortByNameAsc) : this.visibleSessions.sort(sortByVotersDesc);
     }
   }
@@ -55,7 +54,6 @@ export class SessionListComponent implements OnChanges, OnInit {
     }
 
   }
-
 
   userHasVoted(session: ISession) {
     return this.voterService.userHasVoted(session, this.auth.currentUser.userName);
@@ -76,9 +74,9 @@ export class SessionListComponent implements OnChanges, OnInit {
 
 function sortByNameAsc(s1: ISession, s2: ISession) {
 
-  if (s1.name > s2.name) return 1;
-  else if (s1.name === s2.name) return 0;
-  else return -1;
+  if (s1.name > s2.name) { return 1; }
+  else if (s1.name === s2.name) { return 0; }
+  else { return -1; }
 }
 
 function sortByVotersDesc(s1: ISession, s2: ISession) {

@@ -1,3 +1,1 @@
-export type Spied<T> = {
-  [Method in keyof T]: jasmine.Spy;
-};
+export type Spied<T> = { [Method in keyof T]: jasmine.Spy };
